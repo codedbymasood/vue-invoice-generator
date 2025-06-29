@@ -1,6 +1,4 @@
-
 <template>
-  <TheSidebar />
   <div>
     <slot />
   </div>

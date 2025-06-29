@@ -1,10 +1,18 @@
 <script setup>
-const store = useStore();
-
-const invoices = computed( () => store.invoices );
+definePageMeta({
+  middleware: 'auth'
+})
 </script>
 <template>
   <!-- Sidebar with user and setting link -->
   <!-- List of invoices -->
-  Number of Invoices: {{ invoices.length }}
+  <div>
+    <div>
+      <p>My Invoices</p>
+    </div>
+
+    <div>
+      <a href="#">Create Invoice</a>
+    </div>
+  </div>
 </template>
