@@ -13,6 +13,8 @@ const { signIn, signUp } = useAuth();
 
 const handleLogin = async() => {
   await signIn(email.value, password.value);
+
+  // Fetch the invoice data, saved it in store
 }
 
 const handleSignUp = async() => {
@@ -21,36 +23,54 @@ const handleSignUp = async() => {
 
 </script>
 <template>
-  <div class="vig-container">
-    <div class="vig-form-wrapper">
-      <div class="vig-login-form" v-show="'login' === showForm">
-        <p>Hello Again!</p>
-        <input
-          v-model="email"
-          type="email"
-        />
-        <input
-          v-model="password"
-          type="password"
-        />
-        <button @click="handleLogin">
-          Sign In
-        </button>
-      </div>
-      <div class="vig-signup-form" v-show="'signup' === showForm">
-        <input
-          v-model="signUpEmail"
-          type="email"
-        />
-        <input
-          v-model="signUpPassword"
-          type="password"
-        />
-        <button @click="handleSignUp">
-          Create an Account
-        </button>
+  <div class="flex justify-center items-center h-screen">
+    <div class="vig-form-wrapper border border-black rounded-lg p-8">
+      <div class="vig-form-inner">
+        <div class="vig-login-form" v-show="'login' === showForm">
+          <p>Hello Again!</p>
+          <label class="block">
+            Email
+            <input
+              v-model="email"
+              type="email"
+            />
+          </label>
+          <label class="block">
+            Password
+            <input
+              v-model="password"
+              type="password"
+            />
+          </label>
+          
+          <button @click="handleLogin">
+            Sign In
+          </button>          
+          <p>Don't have an account yet? <span @click="showForm = 'signup'">Sign Up</span></p>
+        </div>
+        <div class="vig-signup-form" v-show="'signup' === showForm">
+          <input
+            v-model="signUpEmail"
+            type="email"
+          />
+          <input
+            v-model="signUpPassword"
+            type="password"
+          />
+          <button @click="handleSignUp">
+            Create an Account
+          </button>
+          
+          <p>Back to <span @click="showForm = 'login'">Login</span></p>
+        </div>
       </div>
     </div>
-    <p>Don't have an account yet? <span @click="showForm = 'signup'">Sign Up</span></p>
   </div>
 </template>
+
+<style>
+input {
+  border: 1px solid #000;
+  border-radius: 4px;
+}
+</style>
