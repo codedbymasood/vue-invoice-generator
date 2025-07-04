@@ -1,0 +1,119 @@
+<script setup>
+const props = defineProps({
+  invoice: Object,
+  user: Object
+})
+
+const invoiceItems = computed( () => JSON.parse(props.invoice.items) )
+
+const subTotal = computed( () => {
+  let amount = 0;
+  invoiceItems.value.forEach( item => {
+    amount += item.amount || 0;
+  });
+});
+
+const taxAmount = computed( () => subTotal.value * .18 ); // Tax value needs to pull from user
+
+const total = computed( () => subTotal.value + taxAmount.value );
+
+const currency = computed( () => '₹' ); // Load currency from user setting
+</script>
+<template>
+  <div class="max-w-4xl mx-auto bg-white p-8 shadow-lg rounded-lg font-sans text-sm text-gray-700 grow">
+    <!-- Header -->
+    <div class="flex justify-between items-center border-b pb-6">
+      <!-- Logo -->
+      <div class="flex items-center gap-4">
+        <!-- <img src="/logo.png" alt="Brand Logo" class="h-12 w-12 object-contain" /> -->
+        <div>
+          <h2 v-if="user && user.company_name" class="text-xl font-bold text-gray-800">{{ user.company_name }}</h2>
+          <p v-if="user && user.company_website" class="text-gray-500 text-xs">{{ user.company_website }}</p>
+        </div>
+      </div>
+      <!-- Invoice Info -->
+      <div class="text-right">
+        <h1 class="text-3xl font-bold text-gray-800">{{ invoice.title }}</h1>
+        <p class="text-gray-500 text-sm">#{{ invoice.invoice_no }}</p>
+      </div>
+    </div>
+
+    <!-- Address Info -->
+    <div class="grid grid-cols-2 gap-6 mt-6">
+      <!-- Company Address -->
+      <div>
+        <p class="text-gray-500 font-medium mb-1">From:</p>
+        <p v-if="user && user.company_name" class="text-gray-800">{{ user.company_name }}</p>
+        <div v-if="user && user.company_address">
+          {{ user.company_address }}
+        </div>
+        <p v-if="user && user.company_email">Email: {{ user.company_email }}</p>
+        <p v-if="user && user.company_phone">Phone: {{ user.company_phone }}</p>
+      </div>
+      <!-- Client Address -->
+      <div class="text-right">
+        <p class="text-gray-500 font-medium mb-1">Bill To:</p>
+        <p v-if="invoice.client_name" class="text-gray-800">{{ invoice.client_name }}</p>
+        <div v-if="invoice.address">
+          {{ invoice.address }}
+        </div>
+        <p v-if="invoice.email">Email: {{ invoice.email }}</p>
+      </div>
+    </div>
+
+    <!-- Dates -->
+    <div class="flex justify-between mt-6">
+      <div></div>
+      <div class="text-right">
+        <p>Issue Date: <span class="text-gray-800">{{ invoice.created_at }}</span></p>
+        <p>Due Date: <span class="text-gray-800">{{ invoice.due_date }}</span></p>
+      </div>
+    </div>
+
+    <!-- Items Table -->
+    <div class="mt-8">
+      <table class="w-full text-left border-collapse">
+        <thead>
+          <tr class="bg-gray-100 text-gray-600 uppercase text-xs">
+            <th class="p-3">Item</th>
+            <th class="p-3 text-right">Qty</th>
+            <th class="p-3 text-right">Rate</th>
+            <th class="p-3 text-right">Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b" v-for="item in invoiceItems">
+            <td class="p-3">{{ item.title }}</td>
+            <td class="p-3 text-right">{{ item.quantity }}</td>
+            <td class="p-3 text-right">{{currency}}{{ item.price }}</td>
+            <td class="p-3 text-right">{{currency}}{{ item.quantity * item.price }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Summary -->
+    <div class="mt-6 flex justify-end">
+      <div class="w-full max-w-xs">
+        <div class="flex justify-between py-2">
+          <span>Subtotal</span>
+          <span>{{currency}}{{subTotal}}</span>
+        </div>
+        <div class="flex justify-between py-2">
+          <span>Tax (18%)</span>
+          <span>{{currency}}{{taxAmount}}</span>
+        </div>
+        <div class="flex justify-between py-2 text-lg font-bold border-t mt-2">
+          <span>Total</span>
+          <span>{{currency}}{{total}}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Note -->
+    <div class="mt-8 text-xs text-center text-gray-500 border-t pt-4">
+      Thank you for your business!
+    </div>
+  </div>
+
+</template>

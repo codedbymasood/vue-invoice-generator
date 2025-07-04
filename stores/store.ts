@@ -10,6 +10,9 @@ export const useStore = defineStore('invoice', {
     },
     addInvoices( invoice ) {
       this.invoices.push(invoice);
+    },
+    getInvoice(id) {      
+      return this.invoices.find( invoice => invoice.id == id );
     }
   },
 })

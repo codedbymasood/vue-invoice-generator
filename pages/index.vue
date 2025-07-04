@@ -5,25 +5,24 @@ definePageMeta({
 
 const store = useStore();
 
-const { invoices, createInvoice, getInvoices } = useInvoice();
+const { createInvoice } = useInvoice();
 
-onMounted( async () => {
-  const invoices = await getInvoices();
+const invoices = ref([]);
 
-  store.initInvoices(invoices);  
-
-  // redirect to edit invoice page there you
-  // edit the invoice details.
+onMounted( () => {
+  invoices.value = store.invoices;
 })
 
 const handleCreateInvoice = async () => {
   const { data } = await createInvoice();
   store.addInvoices(data);  
 }
+
+const editInvoice = (id) => {
+  navigateTo(`/invoice/${id}`)
+}
 </script>
 <template>
-  <!-- Sidebar with user and setting link -->
-  <!-- List of invoices -->
   <div>
     <div class="flex justify-between">
       <div>
@@ -35,9 +34,26 @@ const handleCreateInvoice = async () => {
       </div>
     </div>
   </div>
-  <div>
-    <ul>
-      <li v-for="invoice in invoices">{{ invoice.title }}</li>
-    </ul>
+  <div v-if="invoices.length > 0">
+    <div>
+      <div>
+        <span>SNO</span>
+        <span>Created At</span>
+        <span>Title</span>
+        <span>Client Name</span>
+        <span>Amount</span>
+        <span>Status</span>
+      </div>
+      <div>
+        <div v-for="invoice in invoices" @click="editInvoice(invoice.id)">
+          <span>{{ invoice.invoice_no }}</span>
+          <span>{{ invoice.created_at }}</span>
+          <span>{{ invoice.title }}</span>
+          <span>{{ invoice.client_name }}</span>
+          <span>{{ invoice.amount }}</span>
+          <span>{{ invoice.status }}</span>
+        </div>
+      </div>
+    </div>
   </div>
 </template>

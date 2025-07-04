@@ -45,13 +45,8 @@ export const useInvoice = () => {
     }    
   }
 
-  const invoices = computed( () => {
-    return store.invoices;
-  });
-
   return {
     getInvoices,
-    createInvoice,
-    invoices
+    createInvoice
   };
 }
