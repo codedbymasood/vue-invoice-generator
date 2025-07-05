@@ -1,18 +1,23 @@
+interface InvoiceState {
+  company: Company
+  invoices: Invoice[]
+}
+
 export const useStore = defineStore('invoice', {
-  state: () => ({
-    user: {},
+  state: (): InvoiceState => ({
+    company: {},
     invoices: []
   }),
   getters: {},
   actions: {
-    initInvoices( invoices ) {
+    initInvoices( invoices: Invoice[] ) {
       this.invoices = invoices;
     },
-    addInvoices( invoice ) {
+    addInvoices( invoice: Invoice ) {
       this.invoices.push(invoice);
     },
-    getInvoice(id) {      
-      return this.invoices.find( invoice => invoice.id == id );
+    getInvoice(id: Invoice['id'] ) : Invoice | undefined {      
+      return this.invoices.find( ( invoice: Invoice ) => invoice.id == id );
     }
   },
 })

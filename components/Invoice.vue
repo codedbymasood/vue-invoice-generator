@@ -1,23 +1,25 @@
-<script setup>
-const props = defineProps({
-  invoice: Object,
-  user: Object
-})
+<script setup lang="ts">
+const props = defineProps<{
+  invoice: Invoice,
+  company: Company
+}>()
 
-const invoiceItems = computed( () => JSON.parse(props.invoice.items) )
+const invoiceItems : ComputedRef<Invoice['items']> = computed( () => props.invoice.items )
 
-const subTotal = computed( () => {
+const subTotal : ComputedRef<number> = computed( () => {
   let amount = 0;
   invoiceItems.value.forEach( item => {
-    amount += item.amount || 0;
+    amount += item.price || 0;
   });
+
+  return amount;
 });
 
-const taxAmount = computed( () => subTotal.value * .18 ); // Tax value needs to pull from user
+const taxAmount : ComputedRef<number> = computed( () => subTotal.value * .18 );
 
-const total = computed( () => subTotal.value + taxAmount.value );
+const total : ComputedRef<number> = computed( () => subTotal.value + taxAmount.value );
 
-const currency = computed( () => '₹' ); // Load currency from user setting
+const currency : ComputedRef<Currency> = computed( () => '₹' );
 </script>
 <template>
   <div class="max-w-4xl mx-auto bg-white p-8 shadow-lg rounded-lg font-sans text-sm text-gray-700 grow">
@@ -27,8 +29,8 @@ const currency = computed( () => '₹' ); // Load currency from user setting
       <div class="flex items-center gap-4">
         <!-- <img src="/logo.png" alt="Brand Logo" class="h-12 w-12 object-contain" /> -->
         <div>
-          <h2 v-if="user && user.company_name" class="text-xl font-bold text-gray-800">{{ user.company_name }}</h2>
-          <p v-if="user && user.company_website" class="text-gray-500 text-xs">{{ user.company_website }}</p>
+          <h2 v-if="company && company.name" class="text-xl font-bold text-gray-800">{{ company.name }}</h2>
+          <p v-if="company && company.website" class="text-gray-500 text-xs">{{ company.website }}</p>
         </div>
       </div>
       <!-- Invoice Info -->
@@ -43,12 +45,12 @@ const currency = computed( () => '₹' ); // Load currency from user setting
       <!-- Company Address -->
       <div>
         <p class="text-gray-500 font-medium mb-1">From:</p>
-        <p v-if="user && user.company_name" class="text-gray-800">{{ user.company_name }}</p>
-        <div v-if="user && user.company_address">
-          {{ user.company_address }}
+        <p v-if="company && company.name" class="text-gray-800">{{ company.name }}</p>
+        <div v-if="company && company.address">
+          {{ company.address }}
         </div>
-        <p v-if="user && user.company_email">Email: {{ user.company_email }}</p>
-        <p v-if="user && user.company_phone">Phone: {{ user.company_phone }}</p>
+        <p v-if="company && company.email">Email: {{ company.email }}</p>
+        <p v-if="company && company.phone">Phone: {{ company.phone }}</p>
       </div>
       <!-- Client Address -->
       <div class="text-right">

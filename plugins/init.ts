@@ -4,21 +4,15 @@ export default defineNuxtPlugin(async (nuxtApp) => {
   }
 
   const store = useStore();
-  const { getInvoices } = useInvoice();
 
   const supabase = useSupabaseClient();
 
   const { data: { session } } = await supabase.auth.getSession();
   
+  console.log( session );
+  // TODO: Here needs to get and store the user and company details in the store
+
   if (!session) {
-    console.log( 'User not logged in. Skipping invoice load.' );
     return;
   }
-
-  const invoices = await getInvoices();
-
-  if ( invoices ) {
-    store.initInvoices(invoices);
-  }
 });
-
