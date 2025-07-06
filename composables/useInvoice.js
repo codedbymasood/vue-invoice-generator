@@ -12,7 +12,13 @@ export const useInvoice = () => {
       client_name: 'Client name',
       title: 'Invoice',
       amount: 0,
-      items: [],
+      items: [
+        {
+          title: 'Item Title',
+          quantity: 1,
+          price: 0
+        }
+      ],
       status: 'draft',
       created_at: new Date(Date.now()).toISOString(),
       due_date: cutoffDate.toISOString()

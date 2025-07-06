@@ -15,7 +15,9 @@ const subTotal : ComputedRef<number> = computed( () => {
   return amount;
 });
 
-const taxAmount : ComputedRef<number> = computed( () => subTotal.value * (props.invoice.tax_percentage/100) );
+const taxPercentage : ComputedRef<number> = computed( () => props.invoice.tax_percentage ?? 0 );
+
+const taxAmount : ComputedRef<number> = computed( () => Math.round( subTotal.value * (taxPercentage.value/100) ) );
 
 const total : ComputedRef<number> = computed( () => subTotal.value + taxAmount.value );
 
