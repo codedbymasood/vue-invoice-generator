@@ -5,9 +5,9 @@ const { signOut } = useAuth();
 <template>
   <div class="h-screen w-24">
     <ul>
-      <li>Invoices</li>
-      <li>Settings</li>
-      <li @click="signOut">Log Out</li>
+      <li><NuxtLink to="/">Invoice</NuxtLink></li>
+      <li><NuxtLink to="/settings">Settings</NuxtLink></li>
+      <li @click="signOut" class="cursor-pointer">Log Out</li>
     </ul>
   </div>
 </template>

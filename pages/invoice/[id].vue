@@ -12,10 +12,12 @@ const company = {};
 
 </script>
 
-<template>
-  <div class="flex">
-    <!-- TODO: Invoice template select added here -->
-    <Invoice :invoice :company />
-    <InvoiceSettings />
+<template>  
+  <div class="w-full">
+    <div class="flex">
+      <!-- TODO: Invoice template select added here -->
+      <Invoice :invoice :company />
+      <InvoiceSettings />
+    </div>
   </div>
 </template>
