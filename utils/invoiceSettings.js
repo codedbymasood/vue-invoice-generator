@@ -17,6 +17,26 @@ export default [
         saveIn: 'invoice'
       },
       {
+        id: 'items',
+        title: 'Items',
+        default: [],
+        type: 'items',
+        saveIn: 'invoice'
+      },
+      {
+        id: 'tax_percentage',
+        title: 'Tax Percentage',
+        default: 0,
+        type: 'text',
+        mod: 'number',
+        saveIn: 'invoice'
+      }
+    ]
+  },
+  {
+    title: 'Client Settings',
+    settings: [
+      {
         id: 'client_name',
         title: 'Client Name',
         default: '',
@@ -36,22 +56,12 @@ export default [
         default: '',
         type: 'textarea',
         saveIn: 'invoice'
-      },
-      {
-        id: 'items',
-        title: 'Items',
-        default: [],
-        type: 'items',
-        saveIn: 'invoice'
-      },
-      {
-        id: 'tax_percentage',
-        title: 'Tax Percentage',
-        default: 0,
-        type: 'text',
-        mod: 'number',
-        saveIn: 'invoice'
-      },
+      }
+    ]
+  },
+  {
+    title: 'Date',
+    settings: [
       {
         id: 'created_at',
         title: 'Created At',

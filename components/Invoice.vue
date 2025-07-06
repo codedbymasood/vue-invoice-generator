@@ -104,7 +104,7 @@ const currency : ComputedRef<Currency> = computed( () => '₹' );
           <span>{{currency}}{{subTotal}}</span>
         </div>
         <div class="flex justify-between py-2">
-          <span>Tax ({{invoice.tax_percentage}}%)</span>
+          <span>Tax ({{taxPercentage}}%)</span>
           <span>{{currency}}{{taxAmount}}</span>
         </div>
         <div class="flex justify-between py-2 text-lg font-bold border-t mt-2">
