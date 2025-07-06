@@ -36,7 +36,7 @@ const currency : ComputedRef<Currency> = computed( () => '₹' );
         <!-- <img src="/logo.png" alt="Brand Logo" class="h-12 w-12 object-contain" /> -->
         <div>
           <h2 v-if="company && company.company_name" class="text-xl font-bold text-gray-800">{{ company.company_name }}</h2>
-          <p v-if="company && company.website" class="text-gray-500 text-xs">{{ company.website }}</p>
+          <p v-if="company && company.company_website" class="text-gray-500 text-xs">{{ company.company_website }}</p>
         </div>
       </div>
       <!-- Invoice Info -->
@@ -52,11 +52,11 @@ const currency : ComputedRef<Currency> = computed( () => '₹' );
       <div>
         <p class="text-gray-500 font-medium mb-1">From:</p>
         <p v-if="company && company.company_name" class="text-gray-800">{{ company.company_name }}</p>
-        <div v-if="company && company.address">
-          {{ company.address }}
+        <div v-if="company && company.company_address">
+          {{ company.company_address }}
         </div>
-        <p v-if="company && company.email">Email: {{ company.email }}</p>
-        <p v-if="company && company.phone">Phone: {{ company.phone }}</p>
+        <p v-if="company && company.company_website">Email: {{ company.company_website }}</p>
+        <p v-if="company && company.company_phone">Phone: {{ company.company_phone }}</p>
       </div>
       <!-- Client Address -->
       <div class="text-right">

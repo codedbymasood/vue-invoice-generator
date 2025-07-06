@@ -3,12 +3,11 @@ const store = useStore();
 const route = useRoute();
 const invoiceId = route.params.id;
 const invoice = computed( () => store.getInvoice(invoiceId) );
+const company = computed( () => store.company );
 
 onMounted( () => {
   store.setCurrentInvoice(invoiceId);
 })
-
-const company = {};
 
 </script>
 

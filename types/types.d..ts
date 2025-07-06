@@ -39,8 +39,8 @@ interface Company {
   id?: number
   user_id?: string
   company_name?: string
-  address?: string
-  website?: string
-  email?: string
-  phone?: string
+  company_address?: string
+  company_website?: string
+  company_email?: string
+  company_phone?: string
 }
