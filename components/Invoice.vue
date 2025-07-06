@@ -15,7 +15,7 @@ const subTotal : ComputedRef<number> = computed( () => {
   return amount;
 });
 
-const taxAmount : ComputedRef<number> = computed( () => subTotal.value * .18 );
+const taxAmount : ComputedRef<number> = computed( () => subTotal.value * (props.invoice.tax_percentage/100) );
 
 const total : ComputedRef<number> = computed( () => subTotal.value + taxAmount.value );
 
@@ -56,10 +56,10 @@ const currency : ComputedRef<Currency> = computed( () => '₹' );
       <div class="text-right">
         <p class="text-gray-500 font-medium mb-1">Bill To:</p>
         <p v-if="invoice.client_name" class="text-gray-800">{{ invoice.client_name }}</p>
-        <div v-if="invoice.address">
-          {{ invoice.address }}
+        <div v-if="invoice.client_address">
+          {{ invoice.client_address }}
         </div>
-        <p v-if="invoice.email">Email: {{ invoice.email }}</p>
+        <p v-if="invoice.client_email">Email: {{ invoice.client_email }}</p>
       </div>
     </div>
 
@@ -102,7 +102,7 @@ const currency : ComputedRef<Currency> = computed( () => '₹' );
           <span>{{currency}}{{subTotal}}</span>
         </div>
         <div class="flex justify-between py-2">
-          <span>Tax (18%)</span>
+          <span>Tax ({{invoice.tax_percentage}}%)</span>
           <span>{{currency}}{{taxAmount}}</span>
         </div>
         <div class="flex justify-between py-2 text-lg font-bold border-t mt-2">

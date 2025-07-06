@@ -9,10 +9,10 @@ interface Invoice {
   user_id: string
   invoice_no: string
   client_name: string
-  address: string
-  email: string
+  client_address: string
+  client_email: string
   title: string
-  amount: number
+  tax_percentage: number
   items: InvoiceItem[]
   status: 'draft' | 'sent'
   created_at: string
@@ -24,7 +24,8 @@ interface Setting {
   title: string
   default: string
   type: 'text' | 'textarea' | 'number' | 'select' | 'date' | 'items'
-  options ?: object
+  mod?: 'email' | 'number'
+  options?: object
 }
 
 type Currency = '₹';
@@ -32,9 +33,9 @@ type Currency = '₹';
 interface Company {
   id?: number
   user_id?: string
-  name ?: string
-  address ?: string
-  website ?: string
-  email ?: string
-  phone ?: string
+  name?: string
+  address?: string
+  website?: string
+  email?: string
+  phone?: string
 }

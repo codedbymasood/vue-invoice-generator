@@ -2,7 +2,11 @@
 const store = useStore();
 const route = useRoute();
 const invoiceId = route.params.id;
-const invoice = store.getInvoice(invoiceId);
+const invoice = computed( () => store.getInvoice(invoiceId) );
+
+onMounted( () => {
+  store.setCurrentInvoice(invoiceId);
+})
 
 const company = {};
 

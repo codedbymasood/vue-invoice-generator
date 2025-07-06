@@ -19,7 +19,7 @@ button {
 input,
 textarea,
 select {
-  padding: 0.75rem;
+  padding: 0.5rem;
   border: 1px solid #ccc;
   border-radius: 6px;
   width: 100%;
