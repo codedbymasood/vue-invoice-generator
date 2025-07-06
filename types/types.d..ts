@@ -1,3 +1,8 @@
+interface User {
+  id: string
+  email: string
+}
+
 interface InvoiceItem {
   title: string
   quantity: number
@@ -33,7 +38,7 @@ type Currency = '₹';
 interface Company {
   id?: number
   user_id?: string
-  name?: string
+  company_name?: string
   address?: string
   website?: string
   email?: string

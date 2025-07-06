@@ -1,5 +1,5 @@
 <script setup>
-import invoiceControls from '../utils/invoiceSettings';
+import invoiceControls from '../data/invoiceSettings';
 
 const activeTab = ref(invoiceControls[0].title);
 </script>

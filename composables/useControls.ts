@@ -8,6 +8,8 @@ export const useControls = (setting: Setting) => {
 
     if ( 'invoice' === saveIn ) {      
       return store.currentInvoice?.[id] ?? setting['default'];
+    } else if( 'company' === saveIn ) {
+      return store.company?.[id] ?? setting['default'] ?? '';
     }
   }
 
@@ -20,11 +22,13 @@ export const useControls = (setting: Setting) => {
 
     if ( 'invoice' === saveIn ) {
       store.updateInvoice( id, value );
-    }    
+    } else if( 'company' === saveIn ) {
+      store.updateCompany( id, value );
+    }
   }
 
   const value = computed({
-    get: () => getValue(),
+    get: () => getValue() ?? '',
     set: () => {}
   })
 

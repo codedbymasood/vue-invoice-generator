@@ -4,6 +4,9 @@
   </NuxtLayout>
 </template>
 <style>
+label {
+  display: block;
+}
 input,
 textarea,
 select,
@@ -23,6 +26,7 @@ select {
   border: 1px solid #ccc;
   border-radius: 6px;
   width: 100%;
+  max-width: 300px;
   background: #fff;
   color: #333;
 }

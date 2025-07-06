@@ -17,7 +17,9 @@ const componentMap = {
 
 </script>
 <template>
-  <div v-for="setting in controls.settings" class="mt-4">
-    <component :is="componentMap[setting.type]" :setting />
-  </div>
+  <ClientOnly>
+    <div v-for="setting in controls.settings" class="mt-4">
+      <component :is="componentMap[setting.type]" :setting />
+    </div>
+  </ClientOnly>
 </template>

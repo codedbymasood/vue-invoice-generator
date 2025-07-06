@@ -78,45 +78,4 @@ export default [
       }
     ]
   }
-]
-
-
-// {
-//   title: 'Company Settings',
-//   settings: [{
-//       id: 'company_name',
-//       title: 'Name',
-//       default: '',
-//       type: 'text',
-//       saveIn: 'invoice'
-//     },
-//     {
-//       id: 'company_address',
-//       title: 'Address',
-//       default: '',
-//       type: 'text',
-//       saveIn: 'invoice'
-//     },
-//     {
-//       id: 'company_email',
-//       title: 'Email',
-//       default: '',
-//       type: 'text',
-//       saveIn: 'invoice'
-//     },
-//     {
-//       id: 'company_website',
-//       title: 'Website',
-//       default: '',
-//       type: 'text',
-//       saveIn: 'invoice'
-//     },
-//     {
-//       id: 'company_phone',
-//       title: 'Phone',
-//       default: '',
-//       type: 'text',
-//       saveIn: 'invoice'
-//     }
-//   ]
-// }
+];

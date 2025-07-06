@@ -1,4 +1,5 @@
 interface InvoiceState {
+  user: User
   company: Company
   invoices: Invoice[]
   currentInvoice: Invoice
@@ -6,12 +7,23 @@ interface InvoiceState {
 
 export const useStore = defineStore('invoice', {
   state: (): InvoiceState => ({
+    user: {
+      id: '',
+      email: ''
+    },
     company: {},
     invoices: [],
     currentInvoice: null
   }),
   getters: {},
   actions: {
+    initUser( id: string, email: string) {
+      this.user['id'] = id;
+      this.user['email'] = email;
+    },
+    initCompany( company: Company) {
+      this.company = company;      
+    },
     initInvoices( invoices: Invoice[] ) {
       this.invoices = invoices;
     },
@@ -24,8 +36,13 @@ export const useStore = defineStore('invoice', {
     setCurrentInvoice( id: Invoice['id'] ) {
       this.currentInvoice = this.invoices.find( (invoice : Invoice ) => invoice.id === +id );
     },
-    updateInvoice( id: string, value: string) {
+    updateInvoice( id: string, value: string ) {
       this.currentInvoice[id] = value;
+    },
+    updateCompany( id: string, value: string ) {
+      this.company = this.company || {};
+      
+      this.company[id] = value;      
     }
   },
 })

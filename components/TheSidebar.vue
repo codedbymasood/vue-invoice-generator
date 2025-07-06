@@ -3,7 +3,7 @@ const { signOut } = useAuth();
 </script>
 
 <template>
-  <div class="h-screen w-24">
+  <div class="h-screen w-64">
     <ul>
       <li><NuxtLink to="/">Invoice</NuxtLink></li>
       <li><NuxtLink to="/settings">Settings</NuxtLink></li>
