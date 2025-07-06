@@ -17,6 +17,7 @@ interface Invoice {
   client_address: string
   client_email: string
   title: string
+  amount: number
   tax_percentage: number
   items: InvoiceItem[]
   status: 'draft' | 'sent'

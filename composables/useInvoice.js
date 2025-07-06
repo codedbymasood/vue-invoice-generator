@@ -51,7 +51,29 @@ export const useInvoice = () => {
     }    
   }
 
+  const invoiceItems = computed( () => store?.currentInvoice?.items );
+
+  const subTotal = computed( () => {
+    let amount = 0;
+    invoiceItems.value && invoiceItems.value.forEach( item => {
+      amount += item.price || 0;
+    });
+
+    return amount;
+  });
+
+  const taxPercentage = computed( () => store?.currentInvoice?.tax_percentage ?? 0 );
+
+  const taxAmount = computed( () => Math.round( subTotal.value * (taxPercentage.value/100) ) );
+
+  const total = computed( () => subTotal.value + taxAmount.value );
+
   return {
+    invoiceItems,
+    subTotal,
+    taxPercentage,
+    taxAmount,
+    total,
     getInvoices,
     createInvoice
   };

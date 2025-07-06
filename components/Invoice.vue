@@ -1,29 +1,10 @@
 <script setup lang="ts">
-const props = defineProps<{
+defineProps<{
   invoice: Invoice,
   company: Company
 }>();
 
-const store = useStore();
-console.log(store.company);
-
-
-const invoiceItems : ComputedRef<Invoice['items']> = computed( () => props.invoice.items )
-
-const subTotal : ComputedRef<number> = computed( () => {
-  let amount = 0;
-  invoiceItems.value.forEach( item => {
-    amount += item.price || 0;
-  });
-
-  return amount;
-});
-
-const taxPercentage : ComputedRef<number> = computed( () => props.invoice.tax_percentage ?? 0 );
-
-const taxAmount : ComputedRef<number> = computed( () => Math.round( subTotal.value * (taxPercentage.value/100) ) );
-
-const total : ComputedRef<number> = computed( () => subTotal.value + taxAmount.value );
+const { invoiceItems, taxPercentage, taxAmount, subTotal, total } = useInvoice();
 
 const currency : ComputedRef<Currency> = computed( () => '₹' );
 </script>
