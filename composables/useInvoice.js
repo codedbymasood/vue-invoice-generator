@@ -41,7 +41,7 @@ export const useInvoice = () => {
     }
   }
 
-  const saveInvoiceInDB = async () => {
+  const saveInvoice = async () => {
     try {
       const response = await $fetch('/api/save-invoice', {
         method: 'POST',
@@ -51,6 +51,26 @@ export const useInvoice = () => {
       return {
         success: true,
         message: 'Invoice saved',
+        data: response.data
+      }
+    } catch (error) {
+      console.error('Error:', error.data?.message)
+      throw error
+    }
+  }
+
+  const deleteInvoice = async (id) => {
+    try {
+      const response = await $fetch('/api/delete-invoice', {
+        method: 'POST',
+        body: {
+          id
+        }
+      });
+
+      return {
+        success: true,
+        message: 'Invoice deleted',
         data: response.data
       }
     } catch (error) {
@@ -94,6 +114,7 @@ export const useInvoice = () => {
     total,
     getInvoices,
     createInvoice,
-    saveInvoiceInDB
+    saveInvoice,
+    deleteInvoice
   };
 }

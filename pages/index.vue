@@ -5,7 +5,7 @@ definePageMeta({
 
 const store = useStore();
 
-const { createInvoice } = useInvoice();
+const { createInvoice, deleteInvoice } = useInvoice();
 
 const invoices = ref([]);
 
@@ -16,6 +16,15 @@ onMounted( () => {
 const handleCreateInvoice = async () => {
   const { data } = await createInvoice();
   store.addInvoices(data);  
+}
+
+const handleDeleteInvoice = async (id) => {
+  const { data, success } = await deleteInvoice(id);
+
+  if ( success ) {
+    store.deleteInvoice(id);  
+  }
+  
 }
 
 const editInvoice = (id) => {
@@ -43,6 +52,7 @@ const editInvoice = (id) => {
           <span class="w-[20%] border-r-1 text-center">Client Name</span>
           <span class="w-[20%] border-r-1 text-center">Amount</span>
           <span class="w-[20%] text-center">Status</span>
+          <span class="w-[20%] text-center">Action</span>
         </div>
         <div>
           <div v-for="invoice in invoices" @click="editInvoice(invoice.id)" class="flex justify-between border-1 border-t-0">
@@ -50,7 +60,8 @@ const editInvoice = (id) => {
             <span class="w-[20%] border-r-1 text-center">{{ invoice.issue_date }}</span>
             <span class="w-[20%] border-r-1 text-center">{{ invoice.client_name }}</span>
             <span class="w-[20%] border-r-1 text-center">{{ invoice.amount }}</span>
-            <span class="w-[20%] text-center">{{ invoice.status }}</span>
+            <span class="w-[20%] border-r-1 text-center">{{ invoice.status }}</span>
+            <span @click.stop="handleDeleteInvoice(invoice.id)" class="w-[20%] text-center">Delete</span>
           </div>
         </div>
       </div>

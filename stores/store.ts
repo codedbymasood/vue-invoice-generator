@@ -30,6 +30,10 @@ export const useStore = defineStore('invoice', {
     addInvoices( invoice: Invoice ) {
       this.invoices.push(invoice);
     },
+    deleteInvoice( id: number ) {
+      const index = this.invoices.findIndex( invoice => invoice.id === id );      
+      this.invoices.splice(index, 1);
+    },
     getInvoice( id: Invoice['id'] ) : Invoice | undefined {      
       return this.invoices.find( ( invoice: Invoice ) => invoice.id == id );
     },

@@ -3,21 +3,19 @@
 
 import invoiceControls from '../data/invoiceSettings';
 
-const { downloadPDF } = usePDF();
-
 const activeTab = ref(invoiceControls[0].title);
 
-const { saveInvoiceInDB } = useInvoice();
-const saveInvoice = async () => {
-  const { data } = await saveInvoiceInDB();  
+const { downloadPDF } = usePDF();
+const { saveInvoice } = useInvoice();
+
+
+const handleSaveInvoice = async () => {
+  const { data } = await saveInvoice();  
 }
 
 const handleSavePDF = async () => {
-
   const response = await downloadPDF('invoice-content');
-
-  console.log(response);
-  
+  console.log(response);  
 }
 </script>
 <template>
@@ -27,7 +25,7 @@ const handleSavePDF = async () => {
       <Controls v-if="activeTab == controls.title" :controls />
     </div>
     <div class="absolute bottom-0">
-      <button @click="saveInvoice">Save Invoice</button>
+      <button @click="handleSaveInvoice">Save Invoice</button>
       <button @click="handleSavePDF">Save as PDF</button>
     </div>
   </div>
