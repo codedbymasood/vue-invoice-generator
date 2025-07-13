@@ -63,8 +63,8 @@ export default [
     title: 'Date',
     settings: [
       {
-        id: 'created_at',
-        title: 'Created At',
+        id: 'issue_date',
+        title: 'Issue Date',
         default: '',
         type: 'date',
         saveIn: 'invoice'

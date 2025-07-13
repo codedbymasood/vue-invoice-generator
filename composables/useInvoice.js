@@ -20,7 +20,7 @@ export const useInvoice = () => {
         }
       ],
       status: 'draft',
-      created_at: new Date(Date.now()).toISOString(),
+      issue_date: new Date(Date.now()).toISOString(),
       due_date: cutoffDate.toISOString()
     }
     
@@ -33,6 +33,24 @@ export const useInvoice = () => {
       return {
         success: true,
         message: 'Invoice created successfully',
+        data: response.data
+      }
+    } catch (error) {
+      console.error('Error:', error.data?.message)
+      throw error
+    }
+  }
+
+  const saveInvoiceInDB = async () => {
+    try {
+      const response = await $fetch('/api/save-invoice', {
+        method: 'POST',
+        body: store.currentInvoice
+      });
+
+      return {
+        success: true,
+        message: 'Invoice saved',
         data: response.data
       }
     } catch (error) {
@@ -75,6 +93,7 @@ export const useInvoice = () => {
     taxAmount,
     total,
     getInvoices,
-    createInvoice
+    createInvoice,
+    saveInvoiceInDB
   };
 }

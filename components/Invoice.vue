@@ -54,7 +54,7 @@ const currency : ComputedRef<Currency> = computed( () => '₹' );
     <div class="flex justify-between mt-6">
       <div></div>
       <div class="text-right">
-        <p>Issue Date: <span class="text-gray-800">{{ invoice.created_at }}</span></p>
+        <p>Issue Date: <span class="text-gray-800">{{ invoice.issue_date }}</span></p>
         <p>Due Date: <span class="text-gray-800">{{ invoice.due_date }}</span></p>
       </div>
     </div>

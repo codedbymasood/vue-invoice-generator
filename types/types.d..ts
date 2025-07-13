@@ -21,7 +21,7 @@ interface Invoice {
   tax_percentage: number
   items: InvoiceItem[]
   status: 'draft' | 'sent'
-  created_at: string
+  issue_date: string
   due_date: string
 }
 
