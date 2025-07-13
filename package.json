@@ -15,6 +15,7 @@
     "@tailwindcss/vite": "^4.1.11",
     "@vuepic/vue-datepicker": "^11.0.2",
     "nuxt": "^3.17.5",
+    "pdf-puppeteer": "^1.1.11",
     "pinia": "^3.0.3",
     "tailwindcss": "^4.1.11",
     "vue": "^3.5.17",

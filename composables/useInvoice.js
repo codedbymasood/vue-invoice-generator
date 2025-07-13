@@ -74,8 +74,8 @@ export const useInvoice = () => {
   const subTotal = computed( () => {
     let amount = 0;
     invoiceItems.value && invoiceItems.value.forEach( item => {
-      amount += item.price || 0;
-    });
+      amount += +item?.price * +item?.quantity;
+    });   
 
     return amount;
   });
@@ -84,7 +84,7 @@ export const useInvoice = () => {
 
   const taxAmount = computed( () => Math.round( subTotal.value * (taxPercentage.value/100) ) );
 
-  const total = computed( () => subTotal.value + taxAmount.value );
+  const total = computed( () => +subTotal.value + +taxAmount.value );
 
   return {
     invoiceItems,

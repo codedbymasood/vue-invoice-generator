@@ -9,7 +9,7 @@ const { invoiceItems, taxPercentage, taxAmount, subTotal, total } = useInvoice()
 const currency : ComputedRef<Currency> = computed( () => '₹' );
 </script>
 <template>
-  <div class="max-w-4xl mx-auto bg-white p-8 shadow-lg rounded-lg font-sans text-sm text-gray-700 grow">
+  <div id="invoice-content" class="max-w-4xl mx-auto bg-white p-8 shadow-lg rounded-lg font-sans text-sm text-gray-700 grow">
     <!-- Header -->
     <div class="flex justify-between items-center border-b pb-6">
       <!-- Logo -->

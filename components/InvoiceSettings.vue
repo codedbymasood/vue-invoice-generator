@@ -1,13 +1,22 @@
 <script setup>
+
+
 import invoiceControls from '../data/invoiceSettings';
+
+const { downloadPDF } = usePDF();
 
 const activeTab = ref(invoiceControls[0].title);
 
 const { saveInvoiceInDB } = useInvoice();
 const saveInvoice = async () => {
-  const { data } = await saveInvoiceInDB();
+  const { data } = await saveInvoiceInDB();  
+}
 
-  console.log(data);
+const handleSavePDF = async () => {
+
+  const response = await downloadPDF('invoice-content');
+
+  console.log(response);
   
 }
 </script>
@@ -19,7 +28,7 @@ const saveInvoice = async () => {
     </div>
     <div class="absolute bottom-0">
       <button @click="saveInvoice">Save Invoice</button>
-      <button>Save as PDF</button>
+      <button @click="handleSavePDF">Save as PDF</button>
     </div>
   </div>
 </template>

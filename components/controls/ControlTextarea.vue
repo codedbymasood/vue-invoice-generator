@@ -8,6 +8,6 @@ const { value, updateVal } = useControls( props.setting );
 <template>
   <div>
     <label>{{ setting.title }}</label>
-    <textarea @change="updateVal">{{ value }}</textarea>
+    <textarea @input="updateVal">{{ value }}</textarea>
   </div>
 </template>

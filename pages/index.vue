@@ -39,7 +39,7 @@ const editInvoice = (id) => {
       <div>
         <div class="flex justify-between border-1">
           <span class="w-[20%] border-r-1 text-center">Invoice No.</span>
-          <span class="w-[20%] border-r-1 text-center">Created At</span>
+          <span class="w-[20%] border-r-1 text-center">Issue Date</span>
           <span class="w-[20%] border-r-1 text-center">Client Name</span>
           <span class="w-[20%] border-r-1 text-center">Amount</span>
           <span class="w-[20%] text-center">Status</span>
@@ -47,7 +47,7 @@ const editInvoice = (id) => {
         <div>
           <div v-for="invoice in invoices" @click="editInvoice(invoice.id)" class="flex justify-between border-1 border-t-0">
             <span class="w-[20%] border-r-1 text-center">{{ invoice.invoice_no }}</span>
-            <span class="w-[20%] border-r-1 text-center">{{ invoice.created_at }}</span>
+            <span class="w-[20%] border-r-1 text-center">{{ invoice.issue_date }}</span>
             <span class="w-[20%] border-r-1 text-center">{{ invoice.client_name }}</span>
             <span class="w-[20%] border-r-1 text-center">{{ invoice.amount }}</span>
             <span class="w-[20%] text-center">{{ invoice.status }}</span>

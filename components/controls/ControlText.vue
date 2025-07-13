@@ -10,6 +10,6 @@ const type = ( props.setting.mod ) ? props.setting.mod : 'text';
 <template>
   <div>
     <label>{{ setting.title }}</label>
-    <input :type :value @change="updateVal( $event )">
+    <input :type :value @input="updateVal( $event )">
   </div>
 </template>
