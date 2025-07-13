@@ -5,7 +5,7 @@ definePageMeta({
 
 const store = useStore();
 
-const { createInvoice, deleteInvoice } = useInvoice();
+const { createInvoice, deleteInvoice, getTotalByID } = useInvoice();
 
 const invoices = ref([]);
 
@@ -59,7 +59,7 @@ const editInvoice = (id) => {
             <span class="w-[20%] border-r-1 text-center">{{ invoice.invoice_no }}</span>
             <span class="w-[20%] border-r-1 text-center">{{ invoice.issue_date }}</span>
             <span class="w-[20%] border-r-1 text-center">{{ invoice.client_name }}</span>
-            <span class="w-[20%] border-r-1 text-center">{{ invoice.amount }}</span>
+            <span class="w-[20%] border-r-1 text-center">{{ getTotalByID(invoice.id) }}</span>
             <span class="w-[20%] border-r-1 text-center">{{ invoice.status }}</span>
             <span @click.stop="handleDeleteInvoice(invoice.id)" class="w-[20%] text-center">Delete</span>
           </div>

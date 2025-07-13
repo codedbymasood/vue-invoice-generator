@@ -106,6 +106,23 @@ export const useInvoice = () => {
 
   const total = computed( () => +subTotal.value + +taxAmount.value );
 
+  const getTotalByID = (id) => {
+    const index = store.invoices.findIndex( invoice => invoice.id === id );
+
+    const invoice = store.invoices[index];
+
+    let amount = 0;
+    invoice.items && invoice.items.forEach( item => {
+      amount += +item?.price * +item?.quantity;
+    });
+
+    const taxPercentage = invoice?.tax_percentage || 0;  
+
+    const taxAmount = Math.round( amount * (taxPercentage/100) );
+
+    return amount + taxAmount;
+  }
+
   return {
     invoiceItems,
     subTotal,
@@ -115,6 +132,7 @@ export const useInvoice = () => {
     getInvoices,
     createInvoice,
     saveInvoice,
-    deleteInvoice
+    deleteInvoice,
+    getTotalByID
   };
 }
